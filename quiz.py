@@ -138,11 +138,14 @@ def signUpPage():
         
         else:
         
+            #For Mysql
             #conn = sqlite3.connect('quiz.db')
+            #For Xamp Server
             conn=pymysql.connect(host="localhost",user="root",password="",database="quiz")
             create = conn.cursor()
             create.execute('CREATE TABLE IF NOT EXISTS userSignUp(FULLNAME text, USERNAME text,PASSWORD text,COUNTRY text)')
             create.execute("INSERT INTO userSignUp VALUES (%s,%s,%s,%s)",(fullname,username,password,country)) 
+            #For Mysql in Place of %s USE ?
             conn.commit()
             create.execute('SELECT * FROM userSignUp')
             z=create.fetchall()
